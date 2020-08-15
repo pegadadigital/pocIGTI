@@ -1,0 +1,23 @@
+spring:
+  profiles:
+    active: prod
+
+---    
+spring:
+  profiles: dev
+  kafka:
+    template:
+      default-topic: transacao
+    bootstrap-servers: ${KAFKA_PROD_SERVER}
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer
+
+---
+spring:
+  profiles: prod
+  kafka:
+    template:
+      default-topic: transacao
+    bootstrap-servers: localhost:9092
+    producer:
+      value-serializer: org.springframework.kafka.support.serializer.JsonSerializer      
